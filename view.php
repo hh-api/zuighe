@@ -94,7 +94,7 @@ fclose($myfile1);
 <span style="padding-bottom:5px"><b>⏰ Thời Lượng:</b> <?php echo $tg; ?> Phút</span>  
 <?php } ?>
 <span style="padding-bottom:5px"><b>📻 Phát Hành:</b> <a href="#"><?php echo $nam; ?></a></span> 
-<span style="padding-bottom:5px"><b>💚 Lượt Xem:</b> <time itemprop="dateModified">~</time></span></div>
+<span style="padding-bottom:5px"><b>💚 Lượt Xem:</b> <time itemprop="dateModified"><?php $view = './view/'.$slug.'.php'; echo $view1 = file_get_contents($view) + mt_rand(1, 9); $myfile2 = fopen($view, "w"); fwrite($myfile2, $view1); fclose($myfile2); ?></time></span></div>
 
 <?php
 $list0 = file_get_contents($list);
