@@ -145,13 +145,14 @@ $first = explode('|', $list0)['0'];
 $list1 = preg_replace('~\\R~u', "\n", $list0);
 $list1 = explode("\n", $list1);
 foreach ($list1 as $list1) {
+if (strpos($list1, '|') == true) {    
 $get_tap = explode("|", $list1)['0'];    
 ?>
 
 <a class="list-item-episode" href="<?php echo '/'.$get_tap.'/'.$slug; ?>.html"  style="<?php if ($get_tap == $tap) echo 'background-color: #ce6464;color: yellow;'; ?>">
 <span><?php echo $get_tap; ?></span>
 </a>
-<?php } ?>
+<?php }} ?>
 
 </div></div>
 
