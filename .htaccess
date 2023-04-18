@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^([^/]*)\.html$ /view.php?phim=$1 [L]
+RewriteRule ^([^/]*)/([^/]*)\.html$ /xem.php?tap=$1&phim=$2 [L]
