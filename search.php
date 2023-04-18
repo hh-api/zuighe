@@ -52,9 +52,6 @@ $noidung = explode('max-width:1px;">', explode("</td>", $phim['8'])['0'])['1'];
 </div>
 
 
-<?php
-include 'includes/chat.php';
-?>
 
 <div class="clear"></div>
 </div></div>
