@@ -30,7 +30,7 @@ $all_links = explode('<div class="home">', $html);
 foreach ($all_links as $all_links) {
 if (strpos($all_links, '<div class="list">') == true) {  
 $url = explode("'", explode("window.location='/", $all_links)['1'])['0'];
-$slug = explode('/', $url)['2'];
+$slug = explode('.html', explode('/', $url)['2'])['0'];
 $thumb = explode('"', explode('src="', $all_links)['1'])['0'];
 $phim = explode("<td>", $all_links);
 $tenphim = explode("</td>", $phim['2'])['0'];
@@ -43,14 +43,14 @@ $noidung = explode('max-width:1px;">', explode("</td>", $phim['8'])['0'])['1'];
 ?>    
 <article class="bs styleegg" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
 <div class="bsx"> 
-<a href="/<?php echo $slug;?>" itemprop="url" title="<?php echo $tenphim;?>" class="tip" rel="169">
+<a href="/<?php echo $slug;?>.html" itemprop="url" title="<?php echo $tenphim;?>" class="tip" rel="169">
 <div class="limit"><div class="hotbadge" style="border-radius: 5%;width:auto;padding:5px;height:25px;background: linear-gradient(to right,#C02425 0%,#F0CB35 51%,#C02425 100%);"><b>Tập <?php echo $stt;?></b></div>
 
 <div class="egghead"><div class="eggtitle"><font color="yellow"><?php echo $tenphim;?></font></div>
 <div class="eggtitle"><?php echo $tengoc;?></div>
 <div class="eggmeta"><div class="eggtype Drama"><?php echo $nam;?></div>
-<div class="eggepisode"></div></div>
-</div>
+<div class="eggepisode"><?php $view = './view/'.$slug.'.php'; echo number_format(file_get_contents($view), 0, '', '.'); ?></div>
+</div></div>
 <img src="<?php echo $thumb;?>" itemprop="image" title="<?php echo $tenphim;?>" alt="<?php echo $tenphim;?>"/>
 </div>
 </a></div></article>
