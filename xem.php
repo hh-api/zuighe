@@ -125,6 +125,10 @@ color: white;
 <button class="green" onclick="document.getElementById('zuighe').src = '<?php echo $sv2; ?>'">SS-VS</button>
 <?php } ?>
 
+<?php if ($sv3) { ?>
+<button class="green" onclick="document.getElementById('zuighe').src = '<?php echo $sv3; ?>'">ZO-VS</button>
+<?php } ?>
+
 </div></div>
 
 
@@ -237,5 +241,6 @@ $(document).ready(function(){
 });
 </script>
 <?php
+$view = './view/'.$slug.'.php'; $view1 = file_get_contents($view) + mt_rand(1, 9); $myfile2 = fopen($view, "w"); fwrite($myfile2, $view1); fclose($myfile2);
 include 'includes/footer.php';
 ?>
