@@ -88,7 +88,7 @@ $sv3 = explode('+++', $get_auto)['2'];
 </div>
 
 <div class="nvs">
-<a href="<?php if ($tap > 1 ) { echo '/'.($tap+1).'/'.$slug.'.html'; } else { echo '#'; } ?>"><span class="tex">Tập Sau »</span></a> 
+<a href="<?php if ($tap > 0 ) { echo '/'.($tap+1).'/'.$slug.'.html'; } else { echo '#'; } ?>"><span class="tex">Tập Sau »</span></a> 
 </div>
 
 </div>
