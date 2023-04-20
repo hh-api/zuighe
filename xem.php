@@ -7,8 +7,8 @@ $movie = './movie/'.$slug.'.php';
 $list = './list/'.$slug.'.php';
 if (file_exists($movie)) {
 include $movie;
-} else {
-$html = file_get_contents('https://api-hh.blogspot.com/2023/04/'.$slug.'.html');
+if (time() > ($time + 600)) {
+$html = curl('https://api-hh.blogspot.com/2023/04/'.$slug.'.html');
 $info = explode('</div>', explode('<div class="home">', $html)['1'])['0'];
 $thumb = explode('"', explode('src="', $info)['1'])['0'];
 $noidung = explode('</td>', explode('max-width:1px;">', $info)['1'])['0'];
@@ -24,7 +24,33 @@ $nd = '<?php $time="'.time().'"; $tenphim="'.$tenphim.'"; $tengoc="'.$tengoc.'";
 $myfile = fopen($movie, "w");
 fwrite($myfile, $nd);
 fclose($myfile);
-include $option;
+include $movie;
+
+$list0 = explode('</div>', explode('<div class="list">', $html)['1'])['0'];
+$list0 = preg_replace('/\R+/', "\n", trim($list0));
+$myfile1 = fopen($list, "w");
+fwrite($myfile1, $list0);
+fclose($myfile1);    
+}
+
+} else {
+$html = curl('https://api-hh.blogspot.com/2023/04/'.$slug.'.html');
+$info = explode('</div>', explode('<div class="home">', $html)['1'])['0'];
+$thumb = explode('"', explode('src="', $info)['1'])['0'];
+$noidung = explode('</td>', explode('max-width:1px;">', $info)['1'])['0'];
+$phim = explode("<td>", $info);
+$tenphim = explode("</td>", $phim['2'])['0'];
+$tengoc = explode("</td>", $phim['3'])['0'];
+$stt = explode("</td>", $phim['4'])['0'];
+$nam = explode("</td>", $phim['5'])['0'];
+$hd = explode("</td>", $phim['6'])['0'];
+$quocgia = explode("</td>", $phim['7'])['0'];
+
+$nd = '<?php $time="'.time().'"; $tenphim="'.$tenphim.'"; $tengoc="'.$tengoc.'"; $noidung="'.$noidung.'"; $quocgia="'.$quocgia.'"; $stt="'.$stt.'"; $nam="'.$nam.'"; $hd="'.$hd.'"; $thumb="'.$thumb.'"; ?>';
+$myfile = fopen($movie, "w");
+fwrite($myfile, $nd);
+fclose($myfile);
+include $movie;
 
 $list0 = explode('</div>', explode('<div class="list">', $html)['1'])['0'];
 $list0 = preg_replace('/\R+/', "\n", trim($list0));
@@ -33,45 +59,6 @@ fwrite($myfile1, $list0);
 fclose($myfile1);
 
 }
-?>
-
-<title><?php echo $tenphim; ?> Tập <?php echo $tap;?> | <?php echo $slogan;?></title>
-<meta name="description" content="<?php echo $tenphim; ?> Tập <?php echo $tap;?> | <?php echo $slogan;?>"/>
-<meta name="robots" content="follow, index"/>
-<link rel="canonical" href="<?php echo '/'.$link.'-'.$idphim; ?>.html" />
-<meta property="og:locale" content="vi_VN" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="<?php echo $tenphim; ?> Tập <?php echo $tap;?> | <?php echo $slogan;?>" />
-<meta property="og:description" content="<?php echo $tenphim; ?> Tập <?php echo $tap;?> | <?php echo $slogan;?>" />
-<meta property="og:url" content="<?php echo '/'.$link.'-'.$idphim; ?>.html" />
-<meta property="og:site_name" content="ZuiGhe.Net" />
-<meta property="og:image" content="<?php echo $thumb; ?>" />
-<meta property="og:image:secure_url" content="#" />
-<meta property="og:image:width" content="300" />
-<meta property="og:image:height" content="449" />
-<meta property="og:image:type" content="image/png" />
-
-
-<div class="postbody">
-<article id="post-339" class="post-339 hentry" itemscope="itemscope" itemtype="http://schema.org/Episode">
-<script type="text/javascript" src="/js/jquery.min.js"></script>    
-<div class="ts-breadcrumb bixbox" style="margin-bottom: 7px;"><ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
-<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"> <a itemprop="item" href="/"><span itemprop="name"><font color="limegreen">Trang Chủ</font></span></a><meta itemprop="position" content="1"></li> / 
-<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"> <a itemprop="item" href="<?php echo '/'.$slug; ?>.html"><span itemprop="name"><font color="yellow"><?php echo $tenphim; ?></font></span></a><meta itemprop="position" content="2"></li> / 
-<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"> <a itemprop="item" href="#"><span itemprop="name"><font color="limegreen">Tập <?php echo $tap; ?></font></span></a><meta itemprop="position" content="3"></li>
-</ol></div>
-<div class="megavid"><div class="mvelement">
-
-<div class="video-content"><div id="embed_holder" class="lowvid"><div class="player-embed" id="pembed">
-
-<?php
-$list0 = file_get_contents($list);
-$get_auto = explode('<br/>', explode($tap.'|', $list0)['1'])['0'];
-if (strpos($get_auto, '+++') == true) {
-$auto = explode('+++', $get_auto)['0'];
-$sv2 = explode('+++', $get_auto)['1'];
-$sv3 = explode('+++', $get_auto)['2'];
-}   
 ?>
     
 <iframe id="zuighe" width="100%" height="100%" src="<?php echo $auto; ?>" frameborder="0" scrolling="0" allowfullscreen></iframe>
