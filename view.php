@@ -24,7 +24,7 @@ $nd = '<?php $time="'.time().'"; $tenphim="'.$tenphim.'"; $tengoc="'.$tengoc.'";
 $myfile = fopen($movie, "w");
 fwrite($myfile, $nd);
 fclose($myfile);
-include $option;
+include $movie;
 
 $list0 = explode('</div>', explode('<div class="list">', $html)['1'])['0'];
 $list0 = preg_replace('/\R+/', "\n", trim($list0));
@@ -50,7 +50,7 @@ $nd = '<?php $time="'.time().'"; $tenphim="'.$tenphim.'"; $tengoc="'.$tengoc.'";
 $myfile = fopen($movie, "w");
 fwrite($myfile, $nd);
 fclose($myfile);
-include $option;
+include $movie;
 
 $list0 = explode('</div>', explode('<div class="list">', $html)['1'])['0'];
 $list0 = preg_replace('/\R+/', "\n", trim($list0));
